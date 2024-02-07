@@ -1,0 +1,218 @@
+
+mysql> create database test;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| test               |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use test;
+Database changed
+mysql> create table stagiaire(
+    -> id_stagiaire int
+    -> ,
+    -> nom varchar(10),
+    -> prenom varchar(10)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> describe stagiaire;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| id_stagiaire | int         | YES  |     | NULL    |       |
+| nom          | varchar(10) | YES  |     | NULL    |       |
+| prenom       | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table stagiaire
+    -> add note int;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc stagiaire;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| id_stagiaire | int         | YES  |     | NULL    |       |
+| nom          | varchar(10) | YES  |     | NULL    |       |
+| prenom       | varchar(10) | YES  |     | NULL    |       |
+| note         | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table stagiaire
+    -> modify note int
+    -> after id_stagiaire;
+Query OK, 0 rows affected (0.18 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc stagiaire;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| id_stagiaire | int         | YES  |     | NULL    |       |
+| note         | int         | YES  |     | NULL    |       |
+| nom          | varchar(10) | YES  |     | NULL    |       |
+| prenom       | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into stagiaire
+    -> values(1,14,"er-ramiqi","badre"),
+    -> (2,15,"berret","salah"),
+    -> (3,13,"jbara","anas");
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from stagiaire ;
++--------------+------+-----------+--------+
+| id_stagiaire | note | nom       | prenom |
++--------------+------+-----------+--------+
+|            1 |   14 | er-ramiqi | badre  |
+|            2 |   15 | berret    | salah  |
+|            3 |   13 | jbara     | anas   |
++--------------+------+-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> update stagiaire
+    -> set note = 14
+    -> where id_stagiaire = 3 ;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from stagiaire;
++--------------+------+-----------+--------+
+| id_stagiaire | note | nom       | prenom |
++--------------+------+-----------+--------+
+|            1 |   14 | er-ramiqi | badre  |
+|            2 |   15 | berret    | salah  |
+|            3 |   14 | jbara     | anas   |
++--------------+------+-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> alter table stagiaire
+    -> rename column note to moyenne;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc stagiaire;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| id_stagiaire | int         | YES  |     | NULL    |       |
+| moyenne      | int         | YES  |     | NULL    |       |
+| nom          | varchar(10) | YES  |     | NULL    |       |
+| prenom       | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table stagiaire
+    -> modify column nom varchar(15);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc stagiaire;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| id_stagiaire | int         | YES  |     | NULL    |       |
+| moyenne      | int         | YES  |     | NULL    |       |
+| nom          | varchar(15) | YES  |     | NULL    |       |
+| prenom       | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> drop table stagiaire;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show  tables;
+Empty set (0.00 sec)
+
+mysql> desc stagiaire;
+ERROR 1146 (42S02): Table 'test.stagiaire' doesn't exist
+mysql> create table studients(
+    -> id_student int ,
+    -> name varchar(15) not null
+    -> );
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> desc studients;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id_student | int         | YES  |     | NULL    |       |
+| name       | varchar(15) | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into studients
+    -> values (1, "ramiqi");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from studients ;
++------------+--------+
+| id_student | name   |
++------------+--------+
+|          1 | ramiqi |
++------------+--------+
+1 row in set (0.00 sec)
+
+mysql> insert into studients
+    -> values(2, null);
+ERROR 1048 (23000): Column 'name' cannot be null
+mysql> insert into studients
+    -> values (2, "saadi");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from studients;
++------------+--------+
+| id_student | name   |
++------------+--------+
+|          1 | ramiqi |
+|          2 | saadi  |
++------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> alter table studients
+    -> add constraint
+    -> unique (name);
+Query OK, 0 rows affected (0.35 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc studients;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| id_student | int         | YES  |     | NULL    |       |
+| name       | varchar(15) | NO   | PRI | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into studients
+    -> values (3, "saadi");
+ERROR 1062 (23000): Duplicate entry 'saadi' for key 'studients.name'
+mysql> insert into studients
+    -> values (3, "hourri");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from studients;
++------------+--------+
+| id_student | name   |
++------------+--------+
+|          3 | hourri |
+|          1 | ramiqi |
+|          2 | saadi  |
++------------+--------+
+3 rows in set (0.00 sec)
